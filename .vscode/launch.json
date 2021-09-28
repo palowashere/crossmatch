@@ -1,0 +1,42 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/app/crossmatch",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "/app",
+            "environment": [],
+            "MIMode": "gdb",
+            "preLaunchTask": "docker-up",
+            "postDebugTask": "docker-down",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "pipeTransport": {
+                "pipeCwd": "",
+                "pipeProgram": "ssh",
+                "pipeArgs": [
+                    "-ttq",
+                    "-o NumberOfPasswordPrompts=0",
+                    "-o StrictHostKeyChecking=no",
+                    "-o GlobalKnownHostsFile=/dev/null",
+                    "-o UserKnownHostsFile=/dev/null",
+                    "-p 12345",
+                    "root@localhost"
+                ],
+                "debuggerPath": "/usr/bin/gdb"
+            },
+            "sourceFileMap": {
+                "/app/src" : "~/crossmatch/src"
+            }
+        }
+    ]
+}

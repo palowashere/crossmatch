@@ -1,0 +1,7 @@
+version: '3'
+services:
+    crossmatch:
+        build:
+            context: .
+        ports:
+            - "12345:22"
