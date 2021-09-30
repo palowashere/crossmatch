@@ -15,6 +15,11 @@ endif()
 
 set(CROSSMATCH_SRC 
     src/Main.cpp
+    src/Crossmatch.cpp
+    src/Function.cpp
+    src/Log.cpp
+    src/Program.cpp
+    src/StructuralAnalysis.cpp
 )
 
 include_directories(include/)

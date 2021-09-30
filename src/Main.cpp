@@ -1,17 +1,15 @@
-#include <iostream>
-#include <retdec/retdec/retdec.h>
-#include <retdec/llvm/Support/raw_ostream.h>
+#include "Crossmatch.hpp"
+#include "Log.hpp"
 
 int main(int argc, char *argv[])
 {
     (void)argc;
     (void)argv;
 
-    std::cout << "Hello from CrossaMatch!" << std::endl;
-    retdec::common::FunctionSet fs;
-    auto llvm = retdec::disassemble("./samples/test", &fs);
+    crossmatch::log->SetLevel(crossmatch::Level::DEBUG);
 
-    llvm::outs() << *llvm.module;
+    crossmatch::Crossmatch cm;
+    cm.LoadProgram("./samples/test");
 
     return 0;
 }
