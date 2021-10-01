@@ -22,6 +22,7 @@ set(CROSSMATCH_SRC
     src/StructuralAnalysis.cpp
     src/Config.cpp
     src/Utility.cpp
+    src/Graph.cpp
 )
 
 include_directories(include/)

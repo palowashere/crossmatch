@@ -3,6 +3,8 @@
 #include <string>
 #include <map>
 
+#include "Graph.hpp"
+
 namespace crossmatch
 {
     // constants
@@ -14,20 +16,6 @@ namespace crossmatch
         Moderate = 21,  // >= 11 && < 21 -> moderate
         Risky = 40,     // >= 21 && < 41 -> risky
         Unstable = 41   // >= 40 -> unstable
-    };
-
-    enum class CFGEdgeType 
-    {
-        None, Jmp, Fallthrough, CallFallthrough
-    };
-
-    // TODO: move to Graph class?
-    struct EdgeClass
-    {
-        size_t tree_edges{0};
-        size_t forward_edges{0};
-        size_t cross_edges{0};
-        size_t back_edges{0};
     };
 
     struct StructuralInfo 
