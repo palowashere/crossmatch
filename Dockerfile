@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # RETDEC
 RUN apt-get update
-RUN apt-get install -y build-essential cmake git openssl libssl-dev python3 autoconf automake libtool pkg-config m4 zlib1g-dev upx doxygen graphviz ssh openssh-server gdb libcapstone-dev libcapstone3
+RUN apt-get install -y build-essential cmake git openssl libssl-dev python3 autoconf automake libtool pkg-config m4 zlib1g-dev upx doxygen graphviz ssh openssh-server gdb libcapstone-dev libcapstone3 rapidjson-dev
 WORKDIR /retdec
 RUN wget https://github.com/avast/retdec/releases/download/v4.0/retdec-v4.0-ubuntu-64b.tar.xz
 RUN tar -xf retdec-v4.0-ubuntu-64b.tar.xz
@@ -20,6 +20,7 @@ COPY src src/
 COPY include include/
 COPY samples samples/
 COPY CMakeLists.txt .
+COPY config.json .
 RUN cmake -G "Unix Makefiles" .
 RUN make -j 6
 

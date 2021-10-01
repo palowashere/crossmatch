@@ -1,0 +1,23 @@
+{
+    "structural_weights": {
+        "bb_count": 1,
+        "entry_points": 10,
+        "exit_points": 10,
+        "inlinks": 10,
+        "unique_inlinks": 10,
+        "outlinks": 2,
+        "unique_outlinks": 4,
+        "loops": 10,
+        "forward_edges": 10,
+        "cross_edges": 10,
+        "back_edges": 15,
+        "basis_edges": 1,
+        "cfg_bitsig": 5,
+        "folded_cfg_bitsig": 10,
+        "dom_bitsig": 5,
+        "folded_dom_bitsig": 10,
+        "cyc_complexity": 2,
+        "callgraph_depth": 3,
+        "callgraph_dom_depth": 3
+    }
+}

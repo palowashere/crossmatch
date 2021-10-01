@@ -20,6 +20,8 @@ set(CROSSMATCH_SRC
     src/Log.cpp
     src/Program.cpp
     src/StructuralAnalysis.cpp
+    src/Config.cpp
+    src/Utility.cpp
 )
 
 include_directories(include/)
