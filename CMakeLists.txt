@@ -24,6 +24,7 @@ set(CROSSMATCH_SRC
     src/Utility.cpp
     src/Graph.cpp
     src/Dominator.cpp
+    src/Tarjan.cpp
 )
 
 include_directories(include/)

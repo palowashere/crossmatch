@@ -42,6 +42,7 @@ namespace crossmatch
         GraphMap::iterator end();
         GraphMap::const_iterator begin() const;
         GraphMap::const_iterator end() const;
+        std::size_t size() const;
 
         void        AddEdge(Addr src_vertex, Addr dst_vertex, CFGEdgeType type = CFGEdgeType::None);
         void        AddEdge(Addr src_vertex, const std::set<Addr> &dst_vec);
@@ -52,6 +53,7 @@ namespace crossmatch
         void        RemoveEdge(Addr src_vertex, Addr dst_vertex);
         std::size_t GetMaxDepth(Addr start_vertex) const;
         EdgeClass   GetEdgeClass() const;
+        bool        HasVertex(Addr vertex) const;
         
         std::set<Addr> GetPreds(Addr vertex) const;
         std::set<Addr> GetSuccs(Addr vertex) const;

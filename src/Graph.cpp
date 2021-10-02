@@ -248,9 +248,19 @@ namespace crossmatch
     {
         return m_graph.end();
     }
+
+    std::size_t Graph::size() const
+    {
+        return m_graph.size();
+    }
     
     const std::set<Graph::Addr>& Graph::operator[](Addr vertex) const
     {
         return m_graph.at(vertex);
+    }
+
+    bool Graph::HasVertex(Addr vertex) const
+    {
+        return m_graph.count(vertex);
     }
 }
