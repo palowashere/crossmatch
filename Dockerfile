@@ -24,6 +24,9 @@ COPY config.json .
 RUN cmake -G "Unix Makefiles" .
 RUN make -j 6
 
+# TOOLS
+RUN apt-get install vim -y
+
 # DEBUG
 RUN sed -ri 's/#PermitEmptyPasswords no/PermitEmptyPasswords yes/' /etc/ssh/sshd_config
 RUN sed -ri 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
