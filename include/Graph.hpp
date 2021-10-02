@@ -25,6 +25,8 @@ namespace crossmatch
         using GraphMap = std::map<Addr, std::set<Addr>>;
         using VertexLevels = std::map<Addr, std::size_t>;
         using Visited = std::map<Addr, bool>;
+
+        Graph() = default;
         
         struct EdgeClassHelper 
         {
@@ -33,6 +35,13 @@ namespace crossmatch
             int index{0};
             EdgeClass edge_class;
         };
+
+        const std::set<Addr>& operator[](Addr vertex) const;
+
+        GraphMap::iterator begin();
+        GraphMap::iterator end();
+        GraphMap::const_iterator begin() const;
+        GraphMap::const_iterator end() const;
 
         void        AddEdge(Addr src_vertex, Addr dst_vertex, CFGEdgeType type = CFGEdgeType::None);
         void        AddEdge(Addr src_vertex, const std::set<Addr> &dst_vec);

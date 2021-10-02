@@ -228,4 +228,29 @@ namespace crossmatch
             }
         }
     }
+
+    Graph::GraphMap::iterator Graph::begin()
+    {
+        return m_graph.begin();
+    }
+
+    Graph::GraphMap::iterator Graph::end()
+    {
+        return m_graph.end();
+    }
+
+    Graph::GraphMap::const_iterator Graph::begin() const
+    {
+        return m_graph.begin();
+    }
+
+    Graph::GraphMap::const_iterator Graph::end() const
+    {
+        return m_graph.end();
+    }
+    
+    const std::set<Graph::Addr>& Graph::operator[](Addr vertex) const
+    {
+        return m_graph.at(vertex);
+    }
 }

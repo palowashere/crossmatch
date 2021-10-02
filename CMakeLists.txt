@@ -23,6 +23,7 @@ set(CROSSMATCH_SRC
     src/Config.cpp
     src/Utility.cpp
     src/Graph.cpp
+    src/Dominator.cpp
 )
 
 include_directories(include/)
