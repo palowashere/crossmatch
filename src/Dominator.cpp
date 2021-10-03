@@ -2,19 +2,19 @@
 
 namespace crossmatch 
 {
-    Dominator::Dominator(Graph &graph, Graph::Addr vertex)
+    Dominator::Dominator(Graph &graph, const Addr &vertex)
         : m_graph{graph}
     {
         Algorithm(vertex);
     }
 
-    void Dominator::Algorithm(Graph::Addr vertex)
+    void Dominator::Algorithm(const Addr &vertex)
     {
         for(const auto &p : m_graph)
         {
             m_semi[p.first] = 0;
-            m_pred.insert({p.first, std::set<Graph::Addr>{}});
-            m_bucket.insert({p.first, std::set<Graph::Addr>{}});
+            m_pred.insert({p.first, std::set<Addr>{}});
+            m_bucket.insert({p.first, std::set<Addr>{}});
         }
 
         DepthFirstSearch(vertex);
@@ -50,7 +50,7 @@ namespace crossmatch
         }
     }
 
-    void Dominator::DepthFirstSearch(Graph::Addr vertex)
+    void Dominator::DepthFirstSearch(const Addr &vertex)
     {
         m_semi[vertex] = ++m_N;
         m_vertex[m_N] = vertex;
@@ -69,7 +69,7 @@ namespace crossmatch
         }
     }
 
-    Graph::Addr Dominator::Evaluate(Graph::Addr vertex)
+    Addr Dominator::Evaluate(const Addr &vertex)
     {
         if(!m_ancestor[vertex])
         {
@@ -82,7 +82,7 @@ namespace crossmatch
         }
     }
 
-    void Dominator::Compress(Graph::Addr vertex)
+    void Dominator::Compress(const Addr &vertex)
     {
         if(!m_ancestor[m_ancestor[vertex]])
         {
@@ -99,7 +99,7 @@ namespace crossmatch
         m_ancestor[vertex] = m_ancestor[m_ancestor[vertex]];
     }
 
-    void Dominator::Link(Graph::Addr vertex_a, Graph::Addr vertex_b)
+    void Dominator::Link(const Addr &vertex_a, const Addr &vertex_b)
     {
         m_ancestor[vertex_b] = vertex_a;
     }

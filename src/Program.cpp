@@ -27,15 +27,10 @@ namespace crossmatch
     {
         log->info("[Program::StructuralPass] Start");       
 
+        StructuralAnalysis sa;
         for(const auto &f : functions)
         {
-            Function new_function(f.getName());
-            StructuralAnalysis sa;
-
-            if(sa.Analyze(new_function, f))
-            {
-                m_functions.insert({new_function.GetName(), new_function});
-            }
+            sa.Analyze(*this, f);
         }
     }
     
@@ -43,5 +38,15 @@ namespace crossmatch
     {
         log->info("[Program::SemanticPass] Start");       
         (void)functions;
+    }
+
+    void Program::AddCallGraphRoot(Addr root)
+    {
+        m_callgraph_roots.insert(root);
+    }
+
+    void Program::AddFunctionBBStart(Addr function, Addr bb)
+    {
+        m_function_bb_starts[function].insert(bb);
     }
 }

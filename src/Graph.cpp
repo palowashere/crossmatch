@@ -4,7 +4,7 @@
 
 namespace crossmatch
 {
-    void Graph::AddEdge(Addr src_vertex, Addr dst_vertex, CFGEdgeType type)
+    void Graph::AddEdge(const Addr &src_vertex, const Addr &dst_vertex, CFGEdgeType type)
     {
         if(!m_graph.count(src_vertex))
         {
@@ -16,7 +16,7 @@ namespace crossmatch
         AddEdgeType(src_vertex, dst_vertex, type);
     }
 
-    void Graph::AddEdge(Addr src_vertex, const std::set<Addr> &dst_vec)
+    void Graph::AddEdge(const Addr &src_vertex, const std::set<Addr> &dst_vec)
     {
         if(!m_graph.count(src_vertex))
         {
@@ -30,7 +30,7 @@ namespace crossmatch
         }
     }
 
-    void Graph::AddEdgeType(Addr src_vertex, Addr dst_vertex, CFGEdgeType type)
+    void Graph::AddEdgeType(const Addr &src_vertex, const Addr &dst_vertex, CFGEdgeType type)
     {
         if(!m_graph.count(src_vertex))
         {
@@ -40,7 +40,7 @@ namespace crossmatch
         m_edge_types[src_vertex][dst_vertex] = type;
     }
 
-    CFGEdgeType Graph::GetEdgeType(Addr src_vertex, Addr dst_vertex) const
+    CFGEdgeType Graph::GetEdgeType(const Addr &src_vertex, const Addr &dst_vertex) const
     {
         if(!m_edge_types.count(src_vertex) || !m_edge_types.at(src_vertex).count(dst_vertex))
         {
@@ -52,7 +52,7 @@ namespace crossmatch
         }
     } 
 
-    bool Graph::AddVertex(Addr vertex)
+    bool Graph::AddVertex(const Addr &vertex)
     {
         if(m_graph.count(vertex))
         {
@@ -65,12 +65,12 @@ namespace crossmatch
         }
     }
 
-    void Graph::RemoveVertex(Addr vertex)
+    void Graph::RemoveVertex(const Addr &vertex)
     {
         m_graph.erase(vertex);
     }
 
-    void Graph::RemoveEdge(Addr src_vertex, Addr dst_vertex)
+    void Graph::RemoveEdge(const Addr &src_vertex, const Addr &dst_vertex)
     {
         if(m_graph.count(src_vertex) && m_graph.at(src_vertex).count(dst_vertex))
         {
@@ -79,7 +79,7 @@ namespace crossmatch
         }
     }
 
-    Graph::VertexLevels Graph::GetVertexLevels(Addr start_vertex) const
+    Graph::VertexLevels Graph::GetVertexLevels(const Addr &start_vertex) const
     {
         Visited visited;
         std::queue<Addr> queue;
@@ -113,7 +113,7 @@ namespace crossmatch
         return levels;
     }
 
-    std::size_t Graph::GetMaxDepth(Addr start_vertex) const
+    std::size_t Graph::GetMaxDepth(const Addr &start_vertex) const
     {
         std::size_t depth{0};
 
@@ -129,7 +129,7 @@ namespace crossmatch
         return depth;
     }
 
-    std::set<Graph::Addr> Graph::GetPreds(Addr vertex) const
+    std::set<Addr> Graph::GetPreds(const Addr &vertex) const
     {
         std::set<Addr> preds;
         
@@ -144,7 +144,7 @@ namespace crossmatch
         return preds;
     }
 
-    std::set<Graph::Addr> Graph::GetSuccs(Addr vertex) const
+    std::set<Addr> Graph::GetSuccs(const Addr &vertex) const
     {
         if(!m_graph.count(vertex))
         {
@@ -156,7 +156,7 @@ namespace crossmatch
         }
     }
 
-    std::string Graph::GetBitSignature(Addr start_vertex) const
+    std::string Graph::GetBitSignature(const Addr &start_vertex) const
     {
         if(!m_graph.count(start_vertex))
         {
@@ -171,7 +171,7 @@ namespace crossmatch
         return signature;
     }
 
-    void Graph::GetBitSignatureInternal(Addr vertex, Visited &visited, std::string &signature) const
+    void Graph::GetBitSignatureInternal(const Addr &vertex, Visited &visited, std::string &signature) const
     {
         visited[vertex] = true;
         signature += "1";
@@ -202,7 +202,7 @@ namespace crossmatch
         return helper.edge_class;
     }
 
-    void Graph::GetEdgeClassInternal(Addr vertex, EdgeClassHelper &helper) const
+    void Graph::GetEdgeClassInternal(const Addr &vertex, EdgeClassHelper &helper) const
     {
         helper.num[vertex] = helper.index++;
         helper.visited[vertex] = true;
@@ -254,12 +254,12 @@ namespace crossmatch
         return m_graph.size();
     }
     
-    const std::set<Graph::Addr>& Graph::operator[](Addr vertex) const
+    const std::set<Addr>& Graph::operator[](Addr vertex) const
     {
         return m_graph.at(vertex);
     }
 
-    bool Graph::HasVertex(Addr vertex) const
+    bool Graph::HasVertex(const Addr &vertex) const
     {
         return m_graph.count(vertex);
     }

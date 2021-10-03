@@ -4,6 +4,8 @@
 #include <vector>
 #include <set>
 
+#include "Utility.hpp"
+
 namespace crossmatch
 {
     enum class CFGEdgeType 
@@ -21,7 +23,6 @@ namespace crossmatch
 
     class Graph {
     public:
-        using Addr = uint64_t;
         using GraphMap = std::map<Addr, std::set<Addr>>;
         using VertexLevels = std::map<Addr, std::size_t>;
         using Visited = std::map<Addr, bool>;
@@ -44,26 +45,26 @@ namespace crossmatch
         GraphMap::const_iterator end() const;
         std::size_t size() const;
 
-        void        AddEdge(Addr src_vertex, Addr dst_vertex, CFGEdgeType type = CFGEdgeType::None);
-        void        AddEdge(Addr src_vertex, const std::set<Addr> &dst_vec);
-        void        AddEdgeType(Addr src_vertex, Addr dst_vertex, CFGEdgeType type);
-        CFGEdgeType GetEdgeType(Addr src_vertex, Addr dst_vertex) const;
-        bool        AddVertex(Addr vertex);
-        void        RemoveVertex(Addr vertex);
-        void        RemoveEdge(Addr src_vertex, Addr dst_vertex);
-        std::size_t GetMaxDepth(Addr start_vertex) const;
+        void        AddEdge(const Addr &src_vertex, const Addr &dst_vertex, CFGEdgeType type = CFGEdgeType::None);
+        void        AddEdge(const Addr &src_vertex, const std::set<Addr> &dst_vec);
+        void        AddEdgeType(const Addr &src_vertex, const Addr &dst_vertex, CFGEdgeType type);
+        CFGEdgeType GetEdgeType(const Addr &src_vertex, const Addr &dst_vertex) const;
+        bool        AddVertex(const Addr &vertex);
+        void        RemoveVertex(const Addr &vertex);
+        void        RemoveEdge(const Addr &src_vertex, const Addr &dst_vertex);
+        std::size_t GetMaxDepth(const Addr &start_vertex) const;
         EdgeClass   GetEdgeClass() const;
-        bool        HasVertex(Addr vertex) const;
+        bool        HasVertex(const Addr &vertex) const;
         
-        std::set<Addr> GetPreds(Addr vertex) const;
-        std::set<Addr> GetSuccs(Addr vertex) const;
+        std::set<Addr> GetPreds(const Addr &vertex) const;
+        std::set<Addr> GetSuccs(const Addr &vertex) const;
 
-        std::string GetBitSignature(Addr start_vertex) const;
+        std::string GetBitSignature(const Addr &start_vertex) const;
 
     private:
-        VertexLevels GetVertexLevels(Addr start_vertex) const;
-        void         GetBitSignatureInternal(Addr vertex, Visited &visited, std::string &signature) const;
-        void         GetEdgeClassInternal(Addr vertex, EdgeClassHelper &helper) const;
+        VertexLevels GetVertexLevels(const Addr &start_vertex) const;
+        void         GetBitSignatureInternal(const Addr &vertex, Visited &visited, std::string &signature) const;
+        void         GetEdgeClassInternal(const Addr &vertex, EdgeClassHelper &helper) const;
 
     private:
         GraphMap m_graph;

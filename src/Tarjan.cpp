@@ -20,7 +20,7 @@ namespace crossmatch
         return result;
     }
 
-    void Tarjan::Visit(std::vector<Components> &result, Graph::Addr vertex)
+    void Tarjan::Visit(std::vector<Components> &result, const Addr &vertex)
     {
         if(m_low.count(vertex))
         {
