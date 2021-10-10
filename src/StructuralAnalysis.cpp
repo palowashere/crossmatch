@@ -1,21 +1,42 @@
 #include "StructuralAnalysis.hpp"
 #include "Log.hpp"
 
+#include <llvm/IR/Function.h>
+#include <llvm/ADT/DepthFirstIterator.h>
+
 namespace crossmatch
 {
-    bool StructuralAnalysis::Analyze(Program &program, const retdec::common::Function &function)
+    bool StructuralAnalysis::Analyze(Program &program, const llvm::Function &function, llvm::CallGraph &callgraph)
     {
-        log->debug("[StructuralAnalysis::Analyze] Structural analysis of function '%s'", function.getName().c_str());
+        StructuralInfo si;
 
-        if(const auto &basic_blocks = function.basicBlocks; basic_blocks.size() > MaxNumOfBBs)
+        log->debug("[StructuralAnalysis::Analyze] Structural analysis of function '%s'", function.getName().data());
+
+        if(const auto &basic_blocks = function.getBasicBlockList(); basic_blocks.size() > MaxNumOfBBs)
         {
-            log->info("[StructuralAnalysis::Analyze] Skipping function '%s' because it has %d bbs", function.getName().c_str(), basic_blocks.size());
+            log->info("[StructuralAnalysis::Analyze] Skipping function '%s' because it has %d bbs", function.getName().data(), basic_blocks.size());
             return false;
         }
 
-        // TODO
-        (void) program;
+        (void)program;
+
+        si.callgraph_depth = GetCallgraphDepth(function, callgraph);
 
         return true;
+    }
+
+    int StructuralAnalysis::GetCallgraphDepth(const llvm::Function &function, llvm::CallGraph &callgraph) const
+    {
+        for(auto it = llvm::df_begin(&callgraph); it != llvm::df_end(&callgraph); it++)
+        {
+            if(auto f = it->getFunction(); f && f->getName().equals(function.getName()))
+            {
+                auto depth = it.getPathLength();
+                log->debug("[StructuralAnalysis::GetCallgraphDepth] Function '%s' depth: %d", f->getName().data(), depth);
+                return depth;
+            }
+        }
+
+        return -1;
     }
 }

@@ -5,12 +5,13 @@ find_package(retdec 4.0 REQUIRED
    COMPONENTS 
       retdec 
       llvm
+      llvmir2hll
 )
 
 set(CMAKE_CXX_STANDARD 17)
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-    add_compile_options(-Wall -Wextra -Werror)
+    add_compile_options(-g -Wall -Wextra -Werror)
 endif()
 
 set(CROSSMATCH_SRC 
@@ -32,4 +33,5 @@ add_executable(crossmatch ${CROSSMATCH_SRC})
 target_link_libraries(crossmatch 
    retdec::retdec
    retdec::deps::llvm
+   retdec::llvmir2hll
 )
